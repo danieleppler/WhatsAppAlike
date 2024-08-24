@@ -25,7 +25,6 @@ function App() {
       Socket.emit("AddNewClientSocket","1")
 
       Socket.on("RecieveMassage",(res)=>{
-        console.log(res)
       })
     }
   },[Socket])

@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 const LoginComp = () => {
 
     const [FormData,SetFormData] = useState()
-    const loginUrl =''
+    const loginUrl ='http://localhost:3000/users/login'
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -14,22 +14,33 @@ const LoginComp = () => {
         SetFormData({...FormData,[e.target.name]:e.target.value})
     }
 
-    const handleSubmit = async () =>{
+    const handleSubmit = async (e) =>{
+      try{
+        e.stopPropagation()
         const {data:resp} = await axios.post(loginUrl,FormData)
         dispatch({type:"update_CurrentLoggedUser",payload:{
           userId : resp._id,
           userName : FormData.username,
-          token:resp.token 
+          DisplayName: resp.DisplayName,
+          token:resp.token,
+          Contacts:resp.Contacts 
         }})
         navigate('/chats')
+
+      }
+        catch(e){
+          alert(e.message)
+        }
+
+       
     }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div >
       User Name : <input name="username" onChange={handleChange}></input> <br />
       PassWord : <input name="password" onChange={handleChange}></input> <br />
-      <button type="submit" >Enter</button>
-    </form>
+      <button onClick={handleSubmit} >Enter</button>
+    </div>
   )
 }
 

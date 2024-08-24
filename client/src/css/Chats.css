@@ -1,0 +1,46 @@
+.RecivedMassage {
+    border:2px solid black;
+    margin: 10px; 
+    background: lightseagreen;
+    padding: 10px;
+}
+
+.SentMassage{
+    border:2px solid black;
+    margin: 10px;
+    background: lightgreen;
+    padding: 10px;
+}
+
+.WriteNewMassage{
+    border: 2px solid black;
+    border-radius: 12px;
+    background: mediumseagreen;
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 200px;
+}
+
+.WriteNewMassageBtn{
+    background: transparent;
+    pointer-events: none;
+}
+
+.ContactInChoseContactMenu{
+    cursor: pointer;
+}
+.ContactInChoseContactMenu:hover{
+    border:1px solid black;
+    border-left:solid transparent;
+    border-right:solid transparent;
+}
+
+
+.AddContactsToGroupDiv{
+    border: 2px solid black;
+    text-align: left;
+    padding: 10px;
+}

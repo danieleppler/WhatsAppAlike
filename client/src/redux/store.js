@@ -7,13 +7,13 @@ import { legacy_createStore as createStore } from 'redux';
 
 
 const persistConfig = {
-    //key:"root", // maybe optional
+    key:"root", 
     storage
 }
 
 const persistedReducer = persistReducer(persistConfig,Reducer)
 
-//const roortReducer = combineReducers({root:persistedReducer}) // maybe optional
+const roortReducer = combineReducers({root:persistedReducer}) // maybe optional
 
-export const store = createStore(persistedReducer)
+export const store = createStore(roortReducer)
 export const persistor = persistStore(store)
