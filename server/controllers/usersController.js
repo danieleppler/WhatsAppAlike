@@ -18,12 +18,39 @@ router.get('/address',async (req,res)=>{
         return res.json(data)
 })
 
+router.get('/GetUsersThatBlockYou/:id',async (req,res) =>{
+    const TokenResp = await jwtFuncs.VerifyUser(req.headers.token)
+    if(TokenResp !== "Success")
+        return res.status(401).send({ error: "Token is invalid or timed out" });
+
+    const data = await userSvc.GetUsersThatBlockYou(req.params.id)
+    return res.json(data)
+})
+
 router.get('/:id',async (req,res)=>{
     const TokenResp = await jwtFuncs.VerifyUser(req.headers.token)
     if(TokenResp !== "Success")
         return res.status(401).send({ error: "Token is invalid or timed out" });
 
     const data = await userSvc.GetUserById(req.params.id)
+    return res.json(data)
+})
+
+router.put('/RemoveBlockFromUser',async (req,res) =>{
+    const TokenResp = await jwtFuncs.VerifyUser(req.headers.token)
+    if(TokenResp !== "Success")
+        return res.status(401).send({ error: "Token is invalid or timed out" });
+    
+    const data = await userSvc.RemoveBlockFromUser(req.body.user,req.body.userToRemoveBlock)
+    return res.json(data)
+
+})
+router.put('/BlockUser',async (req,res)=>{
+    const TokenResp = await jwtFuncs.VerifyUser(req.headers.token)
+    if(TokenResp !== "Success")
+        return res.status(401).send({ error: "Token is invalid or timed out" });
+    
+    const data = await userSvc.BlockUser(req.body.user,req.body.userToBlock)
     return res.json(data)
 })
 

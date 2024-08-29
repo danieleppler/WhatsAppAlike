@@ -59,4 +59,13 @@ router.put('/editGroupTitle',async (req,res) =>{
     return res.json(data)
 })
 
+router.put('/RemoveUsers',async (req,res) =>{
+    const TokenResp = await jwtFuncs.VerifyUser(req.headers.token)
+    if(TokenResp !== "Success")
+        return res.status(401).send({ error: "Token is invalid or timed out" });
+
+    const data = await groupSvc.RemoveUsersFromGroup(req.body.users,req.body.id)
+    return res.json(data)
+})
+
 module.exports = router

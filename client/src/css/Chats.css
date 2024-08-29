@@ -29,10 +29,10 @@
     pointer-events: none;
 }
 
-.ContactInChoseContactMenu{
+.UserInChoseUserMenu{
     cursor: pointer;
 }
-.ContactInChoseContactMenu:hover{
+.UserInChoseUserMenu:hover{
     border:1px solid black;
     border-left:solid transparent;
     border-right:solid transparent;

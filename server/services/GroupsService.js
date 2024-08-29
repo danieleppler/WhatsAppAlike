@@ -39,4 +39,11 @@ const EditGroupTitle = async (title,id) =>{
     return await GroupModel.findOneAndUpdate({_id:id},{GroupTitle:title})
 }
 
-module.exports = {EditGroupTitle,GetUserGroups,AddGroup,GetGroupUsers,DeleteGroup,GetGroupInfo,AddUserToGroup}
+const RemoveUsersFromGroup =async (users,id) =>{
+    const old_data = await GroupModel.find({_id:id})
+    let temp = users.map((x) => x.id)
+    const new_users = old_data[0].Users.filter((x) => {return !temp.includes(x)})
+    return await GroupModel.findOneAndUpdate({_id:id},{Users:new_users})
+}
+
+module.exports = {EditGroupTitle,GetUserGroups,AddGroup,GetGroupUsers,DeleteGroup,GetGroupInfo,AddUserToGroup,RemoveUsersFromGroup}
