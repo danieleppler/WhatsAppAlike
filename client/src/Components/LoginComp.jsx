@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 
+
 const LoginComp = () => {
 
   const [FormData, SetFormData] = useState()
@@ -39,10 +40,11 @@ const LoginComp = () => {
   }
 
   return (
-    <div >
+    <div id="bootstrap_override_body">
+      <span className='PageMainHeader'>Please fill your details</span>
       User Name : <input name="username" onChange={handleChange}></input> <br />
       PassWord : <input name="password" onChange={handleChange}></input> <br />
-      <button onClick={handleSubmit} >Enter</button>
+      <button className="GeneralButton" onClick={handleSubmit} >Enter</button>
     </div>
   )
 }

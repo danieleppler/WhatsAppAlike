@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Socket from "../SocketClient";
 import "../css/Chats.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartGantt, faPen } from "@fortawesome/free-solid-svg-icons";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 import ChoseUsersModal from "./modals/ChoseUsersModal";
 import NewGroupModal from "./modals/NewGroupModal";
 
@@ -61,23 +61,10 @@ const ChatsComp = () => {
     fetchdata();
 
     return () => {
-      //Socket.Socket.off("RecieveMassage", handleMassageRecived);
+
     };
   }, []);
 
-  // const handleMassageRecived = (msg) => {
-  //   const index = ChatsBinder.findIndex(
-  //     (x) => msg.sender === x.Chat_With_Id
-  //   );
-
-  //   let temp = [...ChatsBinder]
-
-  //   temp[index].Last_Massage = msg.massage
-  //   temp[index].Last_Massage_Sent_In = msg.date
-  //   temp[index].NewMassageCount ++;
-
-  //   SetChats(temp)
-  // };
 
   useEffect(() => {
     if (ChatsBinder) {
@@ -145,32 +132,35 @@ const ChatsComp = () => {
   }
 
   return (
-    <div>
-      <h3>Hi {CurrentLoggedUser?.userName}</h3>
+    <div id="bootstrap_override_body">
+      <div>
+        <span id="HeaderLeft">Hi {CurrentLoggedUser?.userName}</span>
+        <Link id="HeaderRight" to="..">Sign Out</Link>
+      </div>
       <ChoseUsersModal UsersList={UserContacts} callBack={handleContactClicked} multipleOption={false} ModalTitle={"Chose Contact to write massage"} />
       <NewGroupModal CurrentLoggedUser={CurrentLoggedUser} UserContacts={UserContacts} handleAddGroupClicked={handleAddGroupClicked} />
-      <Link to="..">Sign Out</Link>
       <br />
-      <div className="WriteNewMassage">
+      <div id="ChatsPageSecondRow">
+        <div className="WriteNewMassage">
+          <button
+            style={{ background: "transparent", border: "none" }}
+            className="btn btn-primary"
+            data-toggle="modal"
+            data-target="#ChoseUsersModal"
+          >
+            Write new massage
+          </button>
+          <FontAwesomeIcon icon={faPen} />
+        </div>
         <button
-          style={{ background: "transparent", border: "none" }}
+          id="OpenGroupChatButton"
           className="btn btn-primary"
           data-toggle="modal"
-          data-target="#ChoseUsersModal"
+          data-target="#AddGroupModal"
         >
-          Write new massage
+          Open Group Chat
         </button>
-        <FontAwesomeIcon icon={faPen} />
       </div>
-
-      <button
-        className="btn btn-primary"
-        data-toggle="modal"
-        data-target="#AddGroupModal"
-      >
-        Open Group Chat
-      </button>
-
       <br />
       <ul>
         {Chats?.map((x, index) => {
